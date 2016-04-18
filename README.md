@@ -2,6 +2,7 @@
 
 TODO
 
+```
 $config = array(
     'allowedAttributes' => array(),
     'bilateralSPs' => array(
@@ -25,3 +26,4 @@ $config = array(
         ),
     )
 )
+```
