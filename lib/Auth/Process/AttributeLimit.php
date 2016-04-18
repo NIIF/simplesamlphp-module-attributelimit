@@ -56,12 +56,6 @@ class sspmod_niif_Auth_Process_AttributeLimit extends SimpleSAML_Auth_Processing
                         var_export($value, true));
                 }
                 $this->allowedAttributes[] = $value;
-            } elseif (is_string($index)) {
-                if (!is_array($value)) {
-                    throw new SimpleSAML_Error_Exception('AttributeLimit: Values for ' . var_export($index, true) .
-                        ' must be specified in an array.');
-                }
-                $this->allowedAttributes[$index] = $value;
             } elseif ($index === 'bilateralSPs') {
                 if (! is_array($value)) {
                     throw new SimpleSAML_Error_Exception('AttributeLimit: Invalid option bilateralSPs: it is not array: ' . var_export($index, true));
@@ -72,6 +66,12 @@ class sspmod_niif_Auth_Process_AttributeLimit extends SimpleSAML_Auth_Processing
                     throw new SimpleSAML_Error_Exception('AttributeLimit: Invalid option bilateralAttributes: it is not array: ' . var_export($index, true));
                 }
                 $this->bilateralAttributes = $value;
+            } elseif (is_string($index)) {
+                if (!is_array($value)) {
+                    throw new SimpleSAML_Error_Exception('AttributeLimit: Values for ' . var_export($index, true) .
+                        ' must be specified in an array.');
+                }
+                $this->allowedAttributes[$index] = $value;
             } else {
                 throw new SimpleSAML_Error_Exception('AttributeLimit: Invalid option: ' . var_export($index, true));
             }
