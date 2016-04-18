@@ -3,11 +3,15 @@
 [![Total Downloads](https://poser.pugx.org/niif/simplesamlphp-module-attributelimit/d/total.png)](https://packagist.org/packages/niif/simplesamlphp-module-attributelimit)
 [![Latest Stable Version](https://poser.pugx.org/niif/simplesamlphp-module-attributelimit/v/stable.png)](https://packagist.org/packages/niif/simplesamlphp-module-attributelimit)
 
+# Install
+`composer require niif/simplesamlphp-module-attributelimit`
 
+# Usage
 TODO
 
 ```
 $config = array(
+    'class' => 'niif:AttributeLimit',
     'allowedAttributes' => array(),
     'bilateralSPs' => array(
         'entityid1' => array(
