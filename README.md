@@ -7,12 +7,13 @@
 `composer require niif/simplesamlphp-module-attributelimit`
 
 # Usage
-TODO
+This module is a forked version of SimpleSAMLphp ```core:AttributeLimit```. It adds the functionality of specifying bilateral attribute relations in addition to the attribute rules defined in the peer's metadata. You can both specify SP entityIDs where you send some additional attributes (_bilateralSPs_) and special attributes to send to some SPs (_bilateralAttributes_).
+
+Example configuration:
 
 ```
 $config = array(
     'class' => 'niif:AttributeLimit',
-    'allowedAttributes' => array(),
     'bilateralSPs' => array(
         'entityid1' => array(
             'attr1',
@@ -32,6 +33,7 @@ $config = array(
             'entityid1',
             'entityid2'
         ),
-    )
+    ),
+    'attribute_x', 'attribute_y',
 )
 ```
