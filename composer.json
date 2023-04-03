@@ -1,5 +1,5 @@
 {
-    "name": "niif/simplesamlphp-module-attributelimit",
+    "name": "sitya/simplesamlphp-module-attributelimit",
     "description": "",
     "type": "simplesamlphp-module",
     "autoload": {
