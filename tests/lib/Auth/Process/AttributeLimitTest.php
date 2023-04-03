@@ -1,6 +1,14 @@
 <?php
 
-class Test_sspmod_niif_Auth_Process_AttributeLimit extends PHPUnit_Framework_TestCase
+declare(strict_types=1);
+
+namespace SimpleSAML\Test\Module\attributelimit\Auth\Process;
+
+use Exception;
+use PHPUnit\Framework\TestCase;
+use SimpleSAML\Module\attributelimit\Auth\Process\AttributeLimit;
+
+class AttributeLimitTest extends TestCase
 {
 
     /**
@@ -10,9 +18,9 @@ class Test_sspmod_niif_Auth_Process_AttributeLimit extends PHPUnit_Framework_Tes
      * @param  array $request The request state.
      * @return array  The state array after processing.
      */
-    private static function processFilter(array $config, array $request)
+    private static function processFilter(array $config, array $request): array
     {
-        $filter = new sspmod_niif_Auth_Process_AttributeLimit($config, null);
+        $filter = new AttributeLimit($config, null);
         $filter->process($request);
         return $request;
     }
@@ -20,7 +28,7 @@ class Test_sspmod_niif_Auth_Process_AttributeLimit extends PHPUnit_Framework_Tes
     /**
      * Test releasing attribute
      */
-    public function testBilateralSPs()
+    public function testBilateralSPs(): void
     {
 
         $expectedData = array(
@@ -53,7 +61,7 @@ class Test_sspmod_niif_Auth_Process_AttributeLimit extends PHPUnit_Framework_Tes
         $this->assertEquals($result['Attributes'], $expectedData['Attributes'], "OK");
     }
 
-    public function testBilateralAttributes()
+    public function testBilateralAttributes(): void
     {
 
         $expectedData = array(
@@ -86,9 +94,9 @@ class Test_sspmod_niif_Auth_Process_AttributeLimit extends PHPUnit_Framework_Tes
         $this->assertEquals($result['Attributes'], $expectedData['Attributes'], "OK");
     }
 
-    public function testInvaildConfigs()
+    public function testInvaildConfigs(): void
     {
-        $this->setExpectedException('SimpleSAML_Error_Exception');
+        $this->expectException(Exception::class);
         $request = array(
             'Attributes' => array(
                 'mail' => array('bob@institutionalmail.org'),
@@ -120,7 +128,7 @@ class Test_sspmod_niif_Auth_Process_AttributeLimit extends PHPUnit_Framework_Tes
     /**
      * Test reading IdP Attributes.
      */
-    public function testIdPAttrs()
+    public function testIdPAttrs(): void
     {
         $config = array(
             'cn', 'mail'
@@ -167,7 +175,7 @@ class Test_sspmod_niif_Auth_Process_AttributeLimit extends PHPUnit_Framework_Tes
     /**
      * Tests when no attributes are in metadata.
      */
-    public function testNULLMetadataAttrs()
+    public function testNULLMetadataAttrs(): void
     {
         $config = array(
             'cn', 'mail'
@@ -225,7 +233,7 @@ class Test_sspmod_niif_Auth_Process_AttributeLimit extends PHPUnit_Framework_Tes
      */
     protected static $request;
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         self::$request = array(
             'Attributes' => array(
@@ -245,7 +253,7 @@ class Test_sspmod_niif_Auth_Process_AttributeLimit extends PHPUnit_Framework_Tes
     /**
      * Test the most basic functionality.
      */
-    public function testBasic()
+    public function testBasic(): void
     {
         $config = array(
             'cn', 'mail'
@@ -261,7 +269,7 @@ class Test_sspmod_niif_Auth_Process_AttributeLimit extends PHPUnit_Framework_Tes
     /**
      * Test defaults with metadata available.
      */
-    public function testDefaultWithMetadata()
+    public function testDefaultWithMetadata(): void
     {
         $config = array(
             'default' => TRUE,
@@ -277,7 +285,7 @@ class Test_sspmod_niif_Auth_Process_AttributeLimit extends PHPUnit_Framework_Tes
     /**
      * Test defaults with attributes and metadata
      */
-    public function testDefaultWithAttrs()
+    public function testDefaultWithAttrs(): void
     {
         $config = array(
             'default' => TRUE,
@@ -300,6 +308,7 @@ class Test_sspmod_niif_Auth_Process_AttributeLimit extends PHPUnit_Framework_Tes
      */
     public function testInvalidConfig()
     {
+        $this->expectException(Exception::class);
         $config = array(
             'invalidArg' => TRUE,
         );
@@ -312,8 +321,9 @@ class Test_sspmod_niif_Auth_Process_AttributeLimit extends PHPUnit_Framework_Tes
      *
      * @expectedException Exception
      */
-    public function testInvalidAttributeName()
+    public function testInvalidAttributeName(): void
     {
+        $this->expectException(Exception::class);
         $config = array(
         null
         );
@@ -325,7 +335,7 @@ class Test_sspmod_niif_Auth_Process_AttributeLimit extends PHPUnit_Framework_Tes
     /**
      * Test for attribute value matching
      */
-    public function testMatchAttributeValues()
+    public function testMatchAttributeValues(): void
     {
         $config = array(
         'eduPersonAffiliation' => array('member')
@@ -370,8 +380,9 @@ class Test_sspmod_niif_Auth_Process_AttributeLimit extends PHPUnit_Framework_Tes
      *
      * @expectedException Exception
      */
-    public function testMatchAttributeValuesNotArray()
+    public function testMatchAttributeValuesNotArray(): void
     {
+        $this->expectException(Exception::class);
         $config = array(
         );
 
@@ -397,7 +408,7 @@ class Test_sspmod_niif_Auth_Process_AttributeLimit extends PHPUnit_Framework_Tes
     /**
      * Test attributes not intersecting
      */
-    public function testNoIntersection()
+    public function testNoIntersection(): void
     {
         $config = array(
             'default' => TRUE,
