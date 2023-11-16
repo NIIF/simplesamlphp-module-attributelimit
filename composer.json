@@ -1,15 +1,29 @@
 {
-    "name": "niif/simplesamlphp-module-attributelimit",
+    "name": "sitya/simplesamlphp-module-attributelimit",
     "description": "",
     "type": "simplesamlphp-module",
-    "require": {
-        "simplesamlphp/composer-module-installer": "^1.1"
-    },
-	"require-dev": {
-        "simplesamlphp/simplesamlphp": "1.14",
-        "phpunit/phpunit": "~3.7"
+    "autoload": {
+        "psr-4": {
+            "SimpleSAML\\Module\\attributelimit\\": "src/"
+        }
     },
     "autoload-dev": {
-      "files": ["tests/_autoload_modules.php"]
-    }    
+        "psr-4": {
+            "SimpleSAML\\Test\\Utils\\": "vendor/simplesamlphp/simplesamlphp/tests/Utils"
+        }
+    },
+    "require": {
+        "php": ">=7.4 || ^8.0",
+        "simplesamlphp/composer-module-installer": "~1.3.2",
+        "simplesamlphp/simplesamlphp": "^2.0.0"
+    },
+    "require-dev": {
+        "simplesamlphp/simplesamlphp-test-framework": "~1.2.1"
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/package-versions-deprecated": true,
+            "simplesamlphp/composer-module-installer": true
+        }
+    }
 }
